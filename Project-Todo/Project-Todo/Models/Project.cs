@@ -22,7 +22,8 @@ namespace Project_Todo.Models
             
         }
 
-        public Project(string AprojectName, string AclassName, DateTime Adeadline, List<Task> AtaskList, int Apriorityname)        {
+        public Project(string AprojectName, string AclassName, DateTime Adeadline, List<Task> AtaskList, int Apriorityname)
+        {
             ProjectName = AprojectName;
             ClassName = AclassName;
             Deadline = Adeadline;
