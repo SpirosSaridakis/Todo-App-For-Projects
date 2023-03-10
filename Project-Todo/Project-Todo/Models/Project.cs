@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,13 +9,14 @@ namespace Project_Todo.Models
 {
     public class Project
     {
+        [Key]
         public int Id { get; set; }
         public string ProjectName { get; set; }
         public string ClassName { get; set; }
 
         public DateTime Deadline { get; set; }
 
-        public List<Task> TaskList { get; set; }
+        public int CurrentTask { get; set; }
 
         public int Priority { get; set; }
         public Project() 
@@ -22,12 +24,12 @@ namespace Project_Todo.Models
             
         }
 
-        public Project(string AprojectName, string AclassName, DateTime Adeadline, List<Task> AtaskList, int Apriorityname)
+        public Project(string AprojectName, string AclassName, DateTime Adeadline, int Apriorityname)
         {
             ProjectName = AprojectName;
             ClassName = AclassName;
             Deadline = Adeadline;
-            TaskList = AtaskList;
+            CurrentTask = 1;
             Priority = Apriorityname;
         }
 
