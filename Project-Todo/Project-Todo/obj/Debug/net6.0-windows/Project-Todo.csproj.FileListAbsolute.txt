@@ -6,7 +6,6 @@ C:\Users\spiro\Desktop\Coding\C#_Development\Todo-App-For-Projects\Project-Todo\
 C:\Users\spiro\Desktop\Coding\C#_Development\Todo-App-For-Projects\Project-Todo\Project-Todo\bin\Debug\net6.0-windows\EntityFramework.SqlServer.dll
 C:\Users\spiro\Desktop\Coding\C#_Development\Todo-App-For-Projects\Project-Todo\Project-Todo\bin\Debug\net6.0-windows\EntityFramework.dll
 C:\Users\spiro\Desktop\Coding\C#_Development\Todo-App-For-Projects\Project-Todo\Project-Todo\obj\Debug\net6.0-windows\Project-Todo.csproj.AssemblyReference.cache
-C:\Users\spiro\Desktop\Coding\C#_Development\Todo-App-For-Projects\Project-Todo\Project-Todo\obj\Debug\net6.0-windows\Project_Todo.Form1.resources
 C:\Users\spiro\Desktop\Coding\C#_Development\Todo-App-For-Projects\Project-Todo\Project-Todo\obj\Debug\net6.0-windows\Project-Todo.csproj.GenerateResource.cache
 C:\Users\spiro\Desktop\Coding\C#_Development\Todo-App-For-Projects\Project-Todo\Project-Todo\obj\Debug\net6.0-windows\Project-Todo.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\spiro\Desktop\Coding\C#_Development\Todo-App-For-Projects\Project-Todo\Project-Todo\obj\Debug\net6.0-windows\Project-Todo.AssemblyInfoInputs.cache
@@ -27,3 +26,7 @@ C:\Users\spiro\Desktop\Coding\C#_Development\Todo-App-For-Projects\Project-Todo\
 C:\Users\spiro\Desktop\Coding\C#_Development\Todo-App-For-Projects\Project-Todo\Project-Todo\obj\Debug\net6.0-windows\Project_Todo.Migrations.StudentTable.resources
 C:\Users\spiro\Desktop\Coding\C#_Development\Todo-App-For-Projects\Project-Todo\Project-Todo\obj\Debug\net6.0-windows\Project_Todo.Migrations.EditedStudentTable.resources
 C:\Users\spiro\Desktop\Coding\C#_Development\Todo-App-For-Projects\Project-Todo\Project-Todo\obj\Debug\net6.0-windows\Project_Todo.Migrations.FKinTasks.resources
+C:\Users\spiro\Desktop\Coding\C#_Development\Todo-App-For-Projects\Project-Todo\Project-Todo\obj\Debug\net6.0-windows\Project_Todo.Windows.AddProjectWindow.resources
+C:\Users\spiro\Desktop\Coding\C#_Development\Todo-App-For-Projects\Project-Todo\Project-Todo\obj\Debug\net6.0-windows\Project_Todo.MainWindow.resources
+C:\Users\spiro\Desktop\Coding\C#_Development\Todo-App-For-Projects\Project-Todo\Project-Todo\obj\Debug\net6.0-windows\Project_Todo.Windows.AddTasksWindow.resources
+C:\Users\spiro\Desktop\Coding\C#_Development\Todo-App-For-Projects\Project-Todo\Project-Todo\obj\Debug\net6.0-windows\Project_Todo.Windows.ViewCurrentTaskWindow.resources
