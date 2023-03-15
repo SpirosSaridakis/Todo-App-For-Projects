@@ -30,9 +30,11 @@
         {
             this.AddProj = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Test = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label2 = new System.Windows.Forms.Label();
+            this.ToTaskViewWindow = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,12 +51,24 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Test});
             this.dataGridView1.Location = new System.Drawing.Point(12, 38);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 29;
             this.dataGridView1.Size = new System.Drawing.Size(776, 315);
             this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // Test
+            // 
+            this.Test.HeaderText = "Test";
+            this.Test.MinimumWidth = 6;
+            this.Test.Name = "Test";
+            this.Test.ReadOnly = true;
+            this.Test.Width = 125;
             // 
             // label1
             // 
@@ -81,11 +95,22 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Progress";
             // 
+            // ToTaskViewWindow
+            // 
+            this.ToTaskViewWindow.Location = new System.Drawing.Point(272, 390);
+            this.ToTaskViewWindow.Name = "ToTaskViewWindow";
+            this.ToTaskViewWindow.Size = new System.Drawing.Size(252, 29);
+            this.ToTaskViewWindow.TabIndex = 5;
+            this.ToTaskViewWindow.Text = "View tasks for the selected project";
+            this.ToTaskViewWindow.UseVisualStyleBackColor = true;
+            this.ToTaskViewWindow.Click += new System.EventHandler(this.ToTaskViewWindow_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ToTaskViewWindow);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label1);
@@ -107,5 +132,7 @@
         private Label label1;
         private ProgressBar progressBar1;
         private Label label2;
+        private DataGridViewTextBoxColumn Test;
+        private Button ToTaskViewWindow;
     }
 }
