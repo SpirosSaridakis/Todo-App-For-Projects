@@ -20,9 +20,9 @@ namespace Project_Todo.Windows
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Done_Click(object sender, EventArgs e)
         {
-
+           
         }
 
         private void AddTasksWindow_Load(object sender, EventArgs e)

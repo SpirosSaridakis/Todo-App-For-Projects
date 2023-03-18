@@ -14,8 +14,8 @@ namespace Project_Todo.Data
             : base("Projects")
         {
         }
-        DbSet<Project> Projects { get; set; }
-        DbSet<Models.Task> Tasks { get; set; }
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<Models.Task> Tasks { get; set; }
 
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Project_Todo.Data;
+using Project_Todo.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,11 @@ namespace Project_Todo.Windows
 {
     public partial class AddProjectWindow : Form
     {
-        public AddProjectWindow()
+        ApplicationDbContext _context;
+        public AddProjectWindow(ApplicationDbContext context)
         {
             InitializeComponent();
+            _context= context;
         }
 
         private void AddProjectWindow_Load(object sender, EventArgs e)
@@ -54,6 +58,12 @@ namespace Project_Todo.Windows
 
         private void ToAddTasks_Click(object sender, EventArgs e)
         {
+            /*
+            //GET THE INFO FROM THE TEXTBOXES AND OTHER STUFF AND CREATE THE PROJECT
+            Project project = new Project("Final Project","information retrieval", DateTime.Now,1);
+            _context.Projects.Add(project);
+            _context.SaveChanges();
+            */
             int numberoftasks = NumberOfTasksBox.SelectedIndex;
             if (numberoftasks==0) 
             {

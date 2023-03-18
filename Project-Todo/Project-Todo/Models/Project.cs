@@ -24,13 +24,13 @@ namespace Project_Todo.Models
             
         }
 
-        public Project(string AprojectName, string AclassName, DateTime Adeadline, int Apriorityname)
+        public Project(string AprojectName, string AclassName, DateTime Adeadline, int Apriority)
         {
             ProjectName = AprojectName;
             ClassName = AclassName;
             Deadline = Adeadline;
             CurrentTask = 1;
-            Priority = Apriorityname;
+            Priority = Apriority;
         }
 
     }

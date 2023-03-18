@@ -21,6 +21,9 @@ namespace Project_Todo.Models
         public int Id { get; set; }
 
         public Project Project { get; set; }
+
+        public int ProjectTaskIndex { get; set; }
+
         public Task()
         {
 

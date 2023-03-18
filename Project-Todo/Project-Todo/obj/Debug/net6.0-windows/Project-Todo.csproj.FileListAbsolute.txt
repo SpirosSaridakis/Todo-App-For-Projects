@@ -30,3 +30,4 @@ C:\Users\spiro\Desktop\Coding\C#_Development\Todo-App-For-Projects\Project-Todo\
 C:\Users\spiro\Desktop\Coding\C#_Development\Todo-App-For-Projects\Project-Todo\Project-Todo\obj\Debug\net6.0-windows\Project_Todo.MainWindow.resources
 C:\Users\spiro\Desktop\Coding\C#_Development\Todo-App-For-Projects\Project-Todo\Project-Todo\obj\Debug\net6.0-windows\Project_Todo.Windows.AddTasksWindow.resources
 C:\Users\spiro\Desktop\Coding\C#_Development\Todo-App-For-Projects\Project-Todo\Project-Todo\obj\Debug\net6.0-windows\Project_Todo.Windows.ViewCurrentTaskWindow.resources
+C:\Users\spiro\Desktop\Coding\C#_Development\Todo-App-For-Projects\Project-Todo\Project-Todo\obj\Debug\net6.0-windows\Project_Todo.Migrations.AddedIndexToTasksTable.resources

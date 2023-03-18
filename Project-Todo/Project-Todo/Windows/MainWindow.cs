@@ -1,17 +1,21 @@
+using Project_Todo.Data;
+using Project_Todo.Models;
 using Project_Todo.Windows;
 
 namespace Project_Todo
 {
     public partial class MainWindow : Form
     {
-        public MainWindow()
+        private readonly ApplicationDbContext _context;
+        public MainWindow(ApplicationDbContext context)
         {
             InitializeComponent();
+            _context = context;
         }
 
         private void AddProj_Click(object sender, EventArgs e)
         {
-            AddProjectWindow window = new AddProjectWindow(); 
+            AddProjectWindow window = new AddProjectWindow(_context); 
             window.FormClosed += new FormClosedEventHandler(RestoreButton);
             window.Show();
             AddProj.Enabled = false;
