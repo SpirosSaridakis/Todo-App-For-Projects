@@ -56,7 +56,7 @@ namespace Project_Todo.Windows
 
         }
 
-        private void ToAddTasks_Click(object sender, EventArgs e)
+        private async void ToAddTasks_Click(object sender, EventArgs e)
         {
             /*
             //GET THE INFO FROM THE TEXTBOXES AND OTHER STUFF AND CREATE THE PROJECT
@@ -71,8 +71,30 @@ namespace Project_Todo.Windows
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            AddTasksWindow window = new AddTasksWindow(numberoftasks);
-            window.Show();
+            Project project = new Project("Final Project", "information retrieval", DateTime.Now, 1);
+            bool result = await AddProjectToDatabase(project);
+            if (result == false)
+            {
+                MessageBox.Show("Project could not be saved", "Please try again",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                AddTasksWindow window = new AddTasksWindow(numberoftasks);
+                window.Show();
+            }
+            
+        }
+
+        public async Task<bool> AddProjectToDatabase(Project project)
+        {
+            _context.Projects.Add(project);
+            if(await _context.SaveChangesAsync()!=1)
+            {
+                return false;
+            }
+            return true;
+            
         }
     }
 }
