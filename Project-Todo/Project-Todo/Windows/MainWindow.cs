@@ -17,9 +17,10 @@ namespace Project_Todo
         private void AddProj_Click(object sender, EventArgs e)
         {
             AddProjectWindow window = new AddProjectWindow(_context); 
-            window.FormClosed += new FormClosedEventHandler(RestoreButton);
             window.Show();
-            AddProj.Enabled = false;
+            this.Hide();
+            window.FormClosed += new FormClosedEventHandler(RestoreWindow);
+            //AddProj.Enabled = false;
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
@@ -39,20 +40,20 @@ namespace Project_Todo
         private void ToTaskViewWindow_Click(object sender, EventArgs e)
         {
             ViewCurrentTaskWindow window = new ViewCurrentTaskWindow();
-            window.FormClosed += new FormClosedEventHandler(RestoreButton);
-            window.Show();
-            ToTaskViewWindow.Enabled = false;
-            
+            window.Show(); 
+            this.Hide();
+            window.FormClosed += new FormClosedEventHandler(RestoreWindow);
         }
-        private void RestoreButton(object sender, FormClosedEventArgs e)
+        private void RestoreWindow(object sender, FormClosedEventArgs e)
         {
             Form closedForm = sender as Form;
-            if (closedForm is AddProjectWindow) 
+            if (closedForm is AddProjectWindow)
             {
-                AddProj.Enabled = true;
-            }else if (closedForm is ViewCurrentTaskWindow)
+                this.Show();
+            }
+            else if (closedForm is ViewCurrentTaskWindow)
             {
-                ToTaskViewWindow.Enabled = true;
+                this.Show();
             }
         }
     }

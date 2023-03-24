@@ -69,8 +69,7 @@ namespace Project_Todo.Windows
 
         private async void ToAddTasks_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("ToAddTasks", "Called",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             string className = ClassBox.Text;
             string projectName = ProjectBox.Text;
             var selectedRange = DeadlineCal.SelectionRange;
@@ -93,6 +92,8 @@ namespace Project_Todo.Windows
                     {
                         AddTasksWindow window = new AddTasksWindow(numberoftasks);
                         window.Show();
+                        this.Hide();
+                        window.FormClosed += new FormClosedEventHandler(RestoreWindow);
                     }
                     break;
 
@@ -150,5 +151,18 @@ namespace Project_Todo.Windows
             }
             return 0;
         }
+        private void RestoreWindow(object sender, FormClosedEventArgs e)
+        {
+            Form closedForm = sender as Form;
+            if (closedForm is AddProjectWindow)
+            {
+                this.Show();
+            }
+            else if (closedForm is ViewCurrentTaskWindow)
+            {
+                this.Show();
+            }
+        }
     }
+
 }
