@@ -14,6 +14,11 @@ namespace Project_Todo.Windows
 {
     public partial class AddProjectWindow : Form
     {
+        public enum Priority
+        {
+            High=1, Medium=2 , Low=3
+        }
+
         ApplicationDbContext _context;
         public AddProjectWindow(ApplicationDbContext context)
         {
@@ -29,6 +34,12 @@ namespace Project_Todo.Windows
                 datasource.Add(i);
             }
             NumberOfTasksBox.DataSource= datasource;
+
+            var datasource2 = new List<Priority>();
+            datasource2.Add(Priority.High);
+            datasource2.Add(Priority.Medium);
+            datasource2.Add(Priority.Low);
+            PriorityBox.DataSource = datasource2;
         }
 
         private void DeadlineCal_DateChanged(object sender, DateRangeEventArgs e)
@@ -53,35 +64,57 @@ namespace Project_Todo.Windows
 
         private void PriorityBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         private async void ToAddTasks_Click(object sender, EventArgs e)
         {
-            /*
-            //GET THE INFO FROM THE TEXTBOXES AND OTHER STUFF AND CREATE THE PROJECT
-            Project project = new Project("Final Project","information retrieval", DateTime.Now,1);
-            _context.Projects.Add(project);
-            _context.SaveChanges();
-            */
+            MessageBox.Show("ToAddTasks", "Called",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            string className = ClassBox.Text;
+            string projectName = ProjectBox.Text;
+            var selectedRange = DeadlineCal.SelectionRange;
+            DateTime deadline = selectedRange.Start;
+            int priority = PriorityBox.SelectedIndex;
             int numberoftasks = NumberOfTasksBox.SelectedIndex;
-            if (numberoftasks==0) 
+
+            int result = ArgumentValidation(className, projectName, priority, numberoftasks);
+            switch (result)
             {
-                MessageBox.Show("Please select a number of tasks", "Error, you forgot to select the number of tasks",
+                case 0:
+                    Project project = new Project(projectName, className, deadline, priority);
+                    var task = System.Threading.Tasks.Task.Run(() => AddProjectToDatabase(project));
+                    var dbresult = await task;
+                    if (dbresult == false)
+                    {
+                        MessageBox.Show("Project could not be saved", "Please try again",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }else
+                    {
+                        AddTasksWindow window = new AddTasksWindow(numberoftasks);
+                        window.Show();
+                    }
+                    break;
+
+                case 1:
+                    MessageBox.Show("Please Enter a Class", "Try again",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            Project project = new Project("Final Project", "information retrieval", DateTime.Now, 1);
-            bool result = await AddProjectToDatabase(project);
-            if (result == false)
-            {
-                MessageBox.Show("Project could not be saved", "Please try again",
+                    break;
+                    
+                case 2:
+                    MessageBox.Show("Please Enter a Project Name", "Try again",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                AddTasksWindow window = new AddTasksWindow(numberoftasks);
-                window.Show();
+                    break;
+
+                case 3:
+                    MessageBox.Show("Please Select a Priority", "Try again",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+
+                case 4:
+                    MessageBox.Show("Please select a number of tasks", "Error, you forgot to select the number of tasks",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
             }
             
         }
@@ -95,6 +128,27 @@ namespace Project_Todo.Windows
             }
             return true;
             
+        }
+
+        public int ArgumentValidation(string ClassName, string ProjectName, int Priority, int NumberOfTasks)
+        {
+            if (ClassName == "")
+            {
+                return 1;
+            }
+            if(ProjectName == "")
+            {
+                return 2;
+            }
+            if(Priority == 0)
+            {
+                return 3;
+            }
+            if (NumberOfTasks == 0) 
+            {
+                return 4;
+            }
+            return 0;
         }
     }
 }

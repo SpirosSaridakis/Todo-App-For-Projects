@@ -1,6 +1,7 @@
 using Project_Todo.Data;
 using Project_Todo.Models;
 using Project_Todo.Windows;
+using System.Data;
 
 namespace Project_Todo
 {
@@ -22,8 +23,12 @@ namespace Project_Todo
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
-        {
-            
+        { 
+            var list = _context.Projects.Select(Project => new { Project.ClassName, Project.ProjectName, Project.Deadline, Project.Priority })
+                .ToList();
+            dataGridView1.DataSource= list;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
