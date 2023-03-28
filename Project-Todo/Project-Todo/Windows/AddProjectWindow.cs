@@ -90,7 +90,7 @@ namespace Project_Todo.Windows
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }else
                     {
-                        AddTasksWindow window = new AddTasksWindow(numberoftasks);
+                        AddTasksWindow window = new AddTasksWindow(numberoftasks,project.Id,_context);
                         window.Show();
                         this.Hide();
                         window.FormClosed += new FormClosedEventHandler(RestoreWindow);
@@ -161,6 +161,10 @@ namespace Project_Todo.Windows
             else if (closedForm is ViewCurrentTaskWindow)
             {
                 this.Show();
+            }else if (closedForm is AddTasksWindow)
+            {
+                this.Show();
+                this.Close();
             }
         }
     }

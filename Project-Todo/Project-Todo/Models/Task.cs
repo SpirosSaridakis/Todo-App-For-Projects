@@ -28,12 +28,12 @@ namespace Project_Todo.Models
         {
 
         }
-        public Task(int AtaskId, string Adescription, int Aprogress, int Pid)
+        public Task(string Adescription, int Aprogress, int Pid, int AprojectTaskIndex)
         {
-            TaskId = AtaskId;
             Description = Adescription;
             Progress = Aprogress;
             Id = Pid;
+            ProjectTaskIndex = AprojectTaskIndex;
         }
     }
 

@@ -50,6 +50,7 @@ namespace Project_Todo
             if (closedForm is AddProjectWindow)
             {
                 this.Show();
+                dataGridView1.Refresh();
             }
             else if (closedForm is ViewCurrentTaskWindow)
             {
