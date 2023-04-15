@@ -29,6 +29,7 @@ namespace Project_Todo
                 .ToList();
             dataGridView1.DataSource= list;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
         }
 
@@ -39,10 +40,24 @@ namespace Project_Todo
 
         private void ToTaskViewWindow_Click(object sender, EventArgs e)
         {
-            ViewCurrentTaskWindow window = new ViewCurrentTaskWindow();
-            window.Show(); 
-            this.Hide();
-            window.FormClosed += new FormClosedEventHandler(RestoreWindow);
+           DataGridViewRow selectedRow = null;
+           if (dataGridView1.SelectedRows.Count == 1)
+            {
+                selectedRow = dataGridView1.SelectedRows[0];
+                string name = selectedRow.Cells["ProjectName"].Value.ToString();
+                string classname = selectedRow.Cells["ClassName"].Value.ToString();
+                Project selected = _context.Projects.FirstOrDefault(Project => Project.ProjectName == name && Project.ClassName == classname);   
+                ViewCurrentTaskWindow window = new ViewCurrentTaskWindow(selected.Id,_context);
+                window.Show();
+                this.Hide();
+                window.FormClosed += new FormClosedEventHandler(RestoreWindow);
+            }
+            else
+            {
+                MessageBox.Show("please select only one project by clicking on a row", "Selection Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
         private void RestoreWindow(object sender, FormClosedEventArgs e)
         {

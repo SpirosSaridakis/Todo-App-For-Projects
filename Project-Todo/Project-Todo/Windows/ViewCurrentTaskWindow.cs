@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project_Todo.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,14 @@ namespace Project_Todo.Windows
 {
     public partial class ViewCurrentTaskWindow : Form
     {
-        public ViewCurrentTaskWindow()
+        private readonly ApplicationDbContext _context;
+        int projectid;
+        public ViewCurrentTaskWindow(int projectId, ApplicationDbContext context)
         {
+            projectid = projectId;
             InitializeComponent();
+            _context = context;
+            
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -40,7 +46,19 @@ namespace Project_Todo.Windows
 
         private void ViewCurrentTaskWindow_Load(object sender, EventArgs e)
         {
-            textBox1.Text = "Sample text here";
+            var tasks = _context.Tasks.Where(Task => Task.Id == projectid).ToList();
+            if (tasks==null)
+            {
+                MessageBox.Show("The selected project does not have any tasks", "Task Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            tasks.Sort((p1, p2) => p1.ProjectTaskIndex.CompareTo(p2.ProjectTaskIndex));
+            if (tasks[0].Description == null)
+            {
+                textBox1.Text = "null";
+            }
+            textBox1.Text = tasks[0].Description;
         }
     }
 }

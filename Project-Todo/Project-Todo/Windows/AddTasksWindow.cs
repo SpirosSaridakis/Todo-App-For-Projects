@@ -17,7 +17,7 @@ namespace Project_Todo.Windows
     {
         public int numberoftasks;
         public int projectId;
-        ApplicationDbContext _context;
+        public readonly ApplicationDbContext _context;
         public AddTasksWindow(int Anumberoftasks, int projectId, ApplicationDbContext context)
         {
             InitializeComponent();
@@ -35,7 +35,7 @@ namespace Project_Todo.Windows
                 counter++;
                 _context.Tasks.Add(task);
                 _context.SaveChanges();
-                //Prepei na kaneis add ta tasks
+
             }
             MessageBox.Show("Tasks saved successfully", "Congratulations",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
