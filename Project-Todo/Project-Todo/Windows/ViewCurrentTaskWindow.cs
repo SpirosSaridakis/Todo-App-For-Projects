@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,9 @@ namespace Project_Todo.Windows
     {
         private readonly ApplicationDbContext _context;
         int projectid;
+        Models.Task currentTask = null;
+        List<Models.Task> selectedProjectTaskList = null;
+        int taskCounter = 0;
         public ViewCurrentTaskWindow(int projectId, ApplicationDbContext context)
         {
             projectid = projectId;
@@ -34,9 +38,13 @@ namespace Project_Todo.Windows
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
+                taskCounter++;
+                currentTask = selectedProjectTaskList[taskCounter];
+                loadNewTask(currentTask);
                 MessageBox.Show("Task completed", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.None);
-                textBox1.Text = "Edited text";
+                
+                
                 //Delete the current text of the textbox
                 //Delete the task from the database
                 //Load the new task percentage and description on the textboxes
@@ -54,11 +62,23 @@ namespace Project_Todo.Windows
                 return;
             }
             tasks.Sort((p1, p2) => p1.ProjectTaskIndex.CompareTo(p2.ProjectTaskIndex));
+            selectedProjectTaskList = tasks;
             if (tasks[0].Description == null)
             {
                 textBox1.Text = "null";
             }
             textBox1.Text = tasks[0].Description;
+            currentTask = tasks[0];
+        }
+
+        public void loadNewTask(Models.Task newCurrentTask)
+        {
+            currentTask= newCurrentTask;
+            if (newCurrentTask.Description==null)
+            {
+                textBox1.Text = "null";
+            }
+            textBox1.Text = newCurrentTask.Description;
         }
     }
 }
