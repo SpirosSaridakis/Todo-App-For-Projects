@@ -41,16 +41,27 @@ namespace Project_Todo
         private void ToTaskViewWindow_Click(object sender, EventArgs e)
         {
            DataGridViewRow selectedRow = null;
-           if (dataGridView1.SelectedRows.Count == 1)
+            if (dataGridView1.SelectedRows.Count == 1)
             {
                 selectedRow = dataGridView1.SelectedRows[0];
                 string name = selectedRow.Cells["ProjectName"].Value.ToString();
                 string classname = selectedRow.Cells["ClassName"].Value.ToString();
-                Project selected = _context.Projects.FirstOrDefault(Project => Project.ProjectName == name && Project.ClassName == classname);   
-                ViewCurrentTaskWindow window = new ViewCurrentTaskWindow(selected.Id,_context);
-                window.Show();
-                this.Hide();
-                window.FormClosed += new FormClosedEventHandler(RestoreWindow);
+                Project selected = _context.Projects.FirstOrDefault(Project => Project.ProjectName == name && Project.ClassName == classname);
+                ViewCurrentTaskWindow window = new ViewCurrentTaskWindow(selected.Id, _context);
+                if (window.selectedProjectTaskList.Count == 0)
+                {
+                    MessageBox.Show("The selected project does not have any tasks.", "Task count error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    window.Close();
+
+                }
+                else
+                {
+                    window.Show();
+                    this.Hide();
+                    window.FormClosed += new FormClosedEventHandler(RestoreWindow);
+                }
+
             }
             else
             {
@@ -65,7 +76,6 @@ namespace Project_Todo
             if (closedForm is AddProjectWindow)
             {
                 this.Show();
-                dataGridView1.Refresh();
             }
             else if (closedForm is ViewCurrentTaskWindow)
             {

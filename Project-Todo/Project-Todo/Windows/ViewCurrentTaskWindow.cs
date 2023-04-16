@@ -17,14 +17,15 @@ namespace Project_Todo.Windows
         private readonly ApplicationDbContext _context;
         int projectid;
         Models.Task currentTask = null;
-        List<Models.Task> selectedProjectTaskList = null;
+        public List<Models.Task> selectedProjectTaskList = null;
         int taskCounter = 0;
         public ViewCurrentTaskWindow(int projectId, ApplicationDbContext context)
         {
             projectid = projectId;
             InitializeComponent();
             _context = context;
-            
+            selectedProjectTaskList = _context.Tasks.Where(Task => Task.Id == projectid).ToList();
+
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -39,13 +40,15 @@ namespace Project_Todo.Windows
             if (result == DialogResult.Yes)
             {
                 taskCounter++;
+                if (selectedProjectTaskList.Count()<=taskCounter)
+                {
+                    MessageBox.Show("All tasks have been completed", "Done",
+                        MessageBoxButtons.OK, MessageBoxIcon.None);
+                    this.Close();
+                    return;
+                }
                 currentTask = selectedProjectTaskList[taskCounter];
                 loadNewTask(currentTask);
-                MessageBox.Show("Task completed", "Success",
-                        MessageBoxButtons.OK, MessageBoxIcon.None);
-                
-                
-                //Delete the current text of the textbox
                 //Delete the task from the database
                 //Load the new task percentage and description on the textboxes
             }
@@ -54,21 +57,16 @@ namespace Project_Todo.Windows
 
         private void ViewCurrentTaskWindow_Load(object sender, EventArgs e)
         {
-            var tasks = _context.Tasks.Where(Task => Task.Id == projectid).ToList();
-            if (tasks==null)
+
+
+            selectedProjectTaskList.Sort((p1, p2) => p1.ProjectTaskIndex.CompareTo(p2.ProjectTaskIndex));
+            if (selectedProjectTaskList[0].Description == null)
             {
-                MessageBox.Show("The selected project does not have any tasks", "Task Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                 textBox1.Text = "null";
             }
-            tasks.Sort((p1, p2) => p1.ProjectTaskIndex.CompareTo(p2.ProjectTaskIndex));
-            selectedProjectTaskList = tasks;
-            if (tasks[0].Description == null)
-            {
-                textBox1.Text = "null";
-            }
-            textBox1.Text = tasks[0].Description;
-            currentTask = tasks[0];
+            textBox1.Text = selectedProjectTaskList[0].Description;
+            currentTask = selectedProjectTaskList[0];
+
         }
 
         public void loadNewTask(Models.Task newCurrentTask)
