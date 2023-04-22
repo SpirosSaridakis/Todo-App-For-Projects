@@ -24,13 +24,9 @@ namespace Project_Todo
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
-        { 
-            var list = _context.Projects.Select(Project => new { Project.ClassName, Project.ProjectName, Project.Deadline, Project.Priority })
-                .ToList();
-            dataGridView1.DataSource= list;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
+        {
+            LoadProjectsFromDB();
+            
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -75,12 +71,22 @@ namespace Project_Todo
             Form closedForm = sender as Form;
             if (closedForm is AddProjectWindow)
             {
+                LoadProjectsFromDB();
                 this.Show();
             }
             else if (closedForm is ViewCurrentTaskWindow)
             {
                 this.Show();
             }
+        }
+
+        public void LoadProjectsFromDB()
+        {
+            var list = _context.Projects.Select(Project => new { Project.ClassName, Project.ProjectName, Project.Deadline, Project.Priority })
+                .ToList();
+            dataGridView1.DataSource = list;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
     }
 }

@@ -40,6 +40,8 @@ namespace Project_Todo.Windows
             datasource2.Add(Priority.Medium);
             datasource2.Add(Priority.Low);
             PriorityBox.DataSource = datasource2;
+            PriorityBox.SelectedIndex = 1;
+
         }
 
         private void DeadlineCal_DateChanged(object sender, DateRangeEventArgs e)
@@ -108,11 +110,6 @@ namespace Project_Todo.Windows
                     break;
 
                 case 3:
-                    MessageBox.Show("Please Select a Priority", "Try again",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    break;
-
-                case 4:
                     MessageBox.Show("Please select a number of tasks", "Error, you forgot to select the number of tasks",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
@@ -141,13 +138,9 @@ namespace Project_Todo.Windows
             {
                 return 2;
             }
-            if(Priority == 0)
-            {
-                return 3;
-            }
             if (NumberOfTasks == 0) 
             {
-                return 4;
+                return 3;
             }
             return 0;
         }
