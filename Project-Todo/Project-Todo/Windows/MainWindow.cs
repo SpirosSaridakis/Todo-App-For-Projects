@@ -76,6 +76,7 @@ namespace Project_Todo
             }
             else if (closedForm is ViewCurrentTaskWindow)
             {
+                LoadProjectsFromDB();
                 this.Show();
             }
         }

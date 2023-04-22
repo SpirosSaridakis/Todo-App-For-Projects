@@ -39,11 +39,16 @@ namespace Project_Todo.Windows
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
+                _context.Tasks.Remove(currentTask);
+                _context.SaveChanges();
                 taskCounter++;
                 if (selectedProjectTaskList.Count()<=taskCounter)
                 {
-                    MessageBox.Show("All tasks have been completed", "Done",
+                    MessageBox.Show("All tasks have been completed. The project has been deleted.", "Done",
                         MessageBoxButtons.OK, MessageBoxIcon.None);
+                    var project_to_be_deleted=_context.Projects.Find(projectid);
+                    _context.Projects.Remove(project_to_be_deleted);
+                    _context.SaveChanges();
                     this.Close();
                     return;
                 }
